@@ -24,6 +24,8 @@ function preload() {
 
 var viruses;
 var info_text;
+var click_count;
+var count_text;
 
 function create() {
     
@@ -42,11 +44,15 @@ function create() {
         virus.body.collideWorldBounds = true;
 
         virus.body.bounce.set(1);
+        
+        click_count = 0;
 //virus.enableBody = true;
         //virus.body.acceration = 100;
     }
 
     info_text = game.add.text(600,550, 'CLICK US :)', 
+        {fontSize: '32px', fill: '#ffa'});
+    count_text = game.add.text(600,450, 'CLICK US :)', 
         {fontSize: '32px', fill: '#ffa'});
         
     walls = game.add.group();
@@ -62,12 +68,15 @@ function update() {
     });
     
     this.game.physics.arcade.collide(viruses, walls, null, null, this);
+    count_text.text = click_count;
 }
 
 function onDown(sprite, pointer) {
     sprite.rotation_speed *= 1.5;
     sprite.body.velocity.x *= 1.2;
     sprite.body.velocity.y *= 1.2;
+    click_count += 1;
+    console.log(click_count);
     
     //if (sprite.rotation_speed > 45) {
     //    sprite.kill();
