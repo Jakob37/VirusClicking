@@ -6,8 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <script src="phaser.min.js"></script>
-        
-        <link rel="stylesheet" type="text/css" href="../../external.css">
+                
     </head>
 <body>
         
@@ -67,6 +66,8 @@ function update() {
 
 function onDown(sprite, pointer) {
     sprite.rotation_speed *= 1.5;
+    sprite.body.velocity.x *= 1.2;
+    sprite.body.velocity.y *= 1.2;
     
     //if (sprite.rotation_speed > 45) {
     //    sprite.kill();
