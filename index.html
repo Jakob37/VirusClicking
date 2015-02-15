@@ -26,6 +26,7 @@ var viruses;
 var info_text;
 var click_count;
 var count_text;
+var spawning_button;
 
 function create() {
     
@@ -84,6 +85,12 @@ function update() {
     
     this.game.physics.arcade.collide(viruses, walls, collidesWall, null, this);
     count_text.text = click_count;
+    
+    if (spawning_button.isDown && click_count >= 10){
+        spawnViruses(200, 200);
+        click_count -= 10;
+    }
+        
 }
 
 function collidesWall(virus, wall) {
@@ -97,10 +104,19 @@ function onDown(sprite, pointer) {
     click_count += 1;
     console.log(click_count);
     
-    //if (sprite.rotation_speed > 45) {
-    //    sprite.kill();
-    //}
 }
+function spawnViruses(xpos, ypos){
+    var virus = viruses.create(xpos, ypos, 'virus');
+    virus.anchor.setTo(0.5, 0.5);
+    virus.inputEnabled = true;
+    virus.rotation_speed = 2 * Math.random() - 1;
+    virus.body.velocity.x = 300 * Math.random() - 150;
+    virus.body.velocity.y = 300 * Math.random() - 150;
+    virus.body.collideWorldBounds = true;
+    virus.body.bounce.set(1);
+}
+
+
 
 
 </script>
