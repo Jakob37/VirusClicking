@@ -14,7 +14,7 @@
 
 <script>
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(1000, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
     
 function preload() {
     game.load.image('virus', 'LittleVirus.jpg');
@@ -53,9 +53,11 @@ function createWalls() {
     walls = game.add.group();
     walls.enableBody = true;
 
-    var w1 = walls.create(0, 0, 'vertical_wall');
-    var w2 = walls.create(game.width, 0, 'vertical_wall');
-    var w3 = walls.create(0, 0, 'horizontal_wall');
+    var wall_width = 7;
+
+    var w1 = walls.create(-wall_width, 0, 'vertical_wall');
+    var w2 = walls.create(game.width - 200, 0, 'vertical_wall');
+    var w3 = walls.create(0, -wall_width, 'horizontal_wall');
     var w4 = walls.create(0, game.height, 'horizontal_wall');
 
     console.log(game.width);
