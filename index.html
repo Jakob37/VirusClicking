@@ -14,10 +14,11 @@
 
 <script>
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
     
 function preload() {
     game.load.image('virus', 'LittleVirus.jpg');
+    game.load.image('button', 'Plus.jpg');
     game.load.image('horizontal_wall', 'sprites/horizontal_wall.png');
     game.load.image('vertical_wall', 'sprites/vertical_wall.png');
 }
@@ -37,6 +38,8 @@ function create() {
         spawnViruses(i * 100 + 100, i * 100);
     }
     
+    game.add.sprite(950, 200, 'button');
+    
     click_count = 0;
 
     info_text = game.add.text(600,550, 'CLICK US :)', 
@@ -54,7 +57,7 @@ function createWalls() {
     walls.enableBody = true;
 
     var w1 = walls.create(0, 0, 'vertical_wall');
-    var w2 = walls.create(game.width, 0, 'vertical_wall');
+    var w2 = walls.create(800, 0, 'vertical_wall');
     var w3 = walls.create(0, 0, 'horizontal_wall');
     var w4 = walls.create(0, game.height, 'horizontal_wall');
 
@@ -83,7 +86,7 @@ function update() {
 }
 
 function collidesWall(virus, wall) {
-    click_count += 3;
+    click_count += 1;
 }
 
 function onDown(sprite, pointer) {
@@ -95,6 +98,9 @@ function onDown(sprite, pointer) {
     
 }
 function spawnViruses(){
+    var X = 600 * Math.random() + 200;
+    var Y = 400 * Math.random() + 200;
+        
     var virus = viruses.create(X, Y, 'virus');
     virus.anchor.setTo(0.5, 0.5);
     virus.inputEnabled = true;
@@ -104,6 +110,8 @@ function spawnViruses(){
     virus.body.velocity.x = 300 * Math.random() - 150;
     virus.body.velocity.y = 300 * Math.random() - 150;
     virus.body.bounce.set(1);
+    virus.scale.x = 1;
+    virus.scale.y = 1;
 }
 
 
