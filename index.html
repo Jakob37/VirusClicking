@@ -19,6 +19,7 @@ var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', { preload: preload, creat
 function preload() {
     game.load.image('virus', 'LittleVirus.jpg');
     game.load.image('button', 'Plus.jpg');
+    game.load.image('small_virus', 'sprites/LittleVirus_small.png');
     game.load.image('horizontal_wall', 'sprites/horizontal_wall.png');
     game.load.image('vertical_wall', 'sprites/vertical_wall.png');
 }
@@ -56,12 +57,13 @@ function createWalls() {
     walls = game.add.group();
     walls.enableBody = true;
 
-    var w1 = walls.create(0, 0, 'vertical_wall');
-    var w2 = walls.create(800, 0, 'vertical_wall');
-    var w3 = walls.create(0, 0, 'horizontal_wall');
-    var w4 = walls.create(0, game.height, 'horizontal_wall');
 
-    console.log(game.width);
+    var wall_width = 7;
+
+    var w1 = walls.create(-wall_width, 0, 'vertical_wall');
+    var w2 = walls.create(game.width - 400, 0, 'vertical_wall');
+    var w3 = walls.create(0, -wall_width, 'horizontal_wall');
+    var w4 = walls.create(0, game.height, 'horizontal_wall');
 
     w1.body.immovable = true;
     w2.body.immovable = true;
@@ -98,20 +100,18 @@ function onDown(sprite, pointer) {
     
 }
 function spawnViruses(){
-    var X = 600 * Math.random() + 200;
-    var Y = 400 * Math.random() + 200;
+
+    var X = 600 * Math.random() + 100;
+    var Y = 400 * Math.random() + 100;
         
-    var virus = viruses.create(X, Y, 'virus');
+    var virus = viruses.create(X, Y, 'small_virus');
+
     virus.anchor.setTo(0.5, 0.5);
     virus.inputEnabled = true;
     virus.rotation_speed = 2 * Math.random() - 1;
-    var X = 500 * Math.random() + 300;
-    var Y = 400 * Math.random() + 300;
     virus.body.velocity.x = 300 * Math.random() - 150;
     virus.body.velocity.y = 300 * Math.random() - 150;
     virus.body.bounce.set(1);
-    virus.scale.x = 1;
-    virus.scale.y = 1;
 }
 
 
