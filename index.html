@@ -39,7 +39,7 @@ function create() {
         spawnViruses(i * 100 + 100, i * 100);
     }
     
-    game.add.sprite(950, 200, 'button');
+    game.add.button(950, 200, 'button', spawnViruses);
     
     click_count = 0;
 
