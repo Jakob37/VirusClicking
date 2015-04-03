@@ -122,9 +122,9 @@ function spawnGreenViruses(){
     
     virus.anchor.setTo(0.5, 0.5);
     virus.inputEnabled = true;
-    virus.rotation_speed = 2 * Math.random() - 1;
-    virus.body.velocity.x = Math.cos(angleOnCircle) * 150;
-    virus.body.velocity.y = Math.sin(angleOnCircle) * 150;
+    virus.rotation_speed = 4 * Math.random() - 1;
+    virus.body.velocity.x = Math.cos(angleOnCircle) * 300;
+    virus.body.velocity.y = Math.sin(angleOnCircle) * 300;
     virus.body.bounce.set(1);
 }
 
