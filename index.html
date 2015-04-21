@@ -6,7 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <script src="phaser.min.js"></script>
-                
+        <script src="Virus Prototype.js"></script>
+        
     </head>
 <body>
 
@@ -79,6 +80,7 @@ function update() {
     });
     
     this.game.physics.arcade.collide(viruses, walls, collidesWall, null, this);
+    this.game.physics.arcade.collide(viruses, viruses, null, null, this);
     count_text.text = click_count;
     
     
@@ -113,19 +115,21 @@ function spawnPurpleViruses(){
 
 function spawnGreenViruses(){
 
-    var X = 600 * Math.random() + 100;
-    var Y = 400 * Math.random() + 100;
+    var virus = new Viruses (game, "green_virus");
+    viruses.add(virus);
+    //var X = 600 * Math.random() + 100;
+    //var Y = 400 * Math.random() + 100;
         
-    var virus = viruses.create(X, Y, 'green_virus');
+    //var virus = viruses.create(X, Y, 'green_virus');
     
-    var angleOnCircle = 2 * Math.PI * Math.random();
+    //var angleOnCircle = 2 * Math.PI * Math.random();
     
-    virus.anchor.setTo(0.5, 0.5);
-    virus.inputEnabled = true;
-    virus.rotation_speed = 4 * Math.random() - 1;
-    virus.body.velocity.x = Math.cos(angleOnCircle) * 300;
-    virus.body.velocity.y = Math.sin(angleOnCircle) * 300;
-    virus.body.bounce.set(1);
+    //virus.anchor.setTo(0.5, 0.5);
+    //virus.inputEnabled = true;
+    //virus.rotation_speed = 4 * Math.random() - 1;
+    //virus.body.velocity.x = Math.cos(angleOnCircle) * 300;
+    //virus.body.velocity.y = Math.sin(angleOnCircle) * 300;
+    //virus.body.bounce.set(1);
 }
 
 function buyPurpleVirus(){
@@ -136,9 +140,9 @@ function buyPurpleVirus(){
 }
     
 function buyGreenVirus(){
-    if (click_count >= 100){
+    if (click_count >= 150){
         spawnGreenViruses();
-        click_count -= 100;
+        click_count -= 150;
     }
 }
 
