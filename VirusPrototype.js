@@ -5,11 +5,12 @@
  */
 
 
-Viruses = function (game, sprite) {
+Viruses = function (game, sprite, speed) {
 
-    var x = 600 * Math.random() + 100;
-    var y = 400 * Math.random() + 100;
-
+    var padding = 50;
+    var bottomMargin = 100;
+    var x = (game.width - padding*2) * Math.random() + padding;
+    var y = (game.height - bottomMargin - padding*2) * Math.random() + padding;
     Phaser.Sprite.call(this, game, x, y, sprite);
     
     var angleOnCircle = 2 * Math.PI * Math.random();
@@ -18,9 +19,10 @@ Viruses = function (game, sprite) {
     this.anchor.setTo(0.5, 0.5);
     this.inputEnabled = true;
     this.rotation_speed = 4 * Math.random() - 1;
-    this.body.velocity.x = Math.cos(angleOnCircle) * 300;
-    this.body.velocity.y = Math.sin(angleOnCircle) * 300;
+    this.body.velocity.x = Math.cos(angleOnCircle) * speed;
+    this.body.velocity.y = Math.sin(angleOnCircle) * speed;
     this.body.bounce.set(1);
+    
 };
 
 Viruses.prototype = Object.create(Phaser.Sprite.prototype);

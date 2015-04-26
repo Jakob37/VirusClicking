@@ -13,7 +13,7 @@
 
 <script>
 
-var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(320, 480, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
     game.load.image('noButton', 'sprites/NoButton.png');
@@ -36,7 +36,7 @@ function create() {
     viruses.enableBody = true;
     game.physics.enable(viruses, Phaser.Physics.ARCADE);
     for (var i = 0; i <= 3; i++) {
-        spawnPurpleViruses(i * 100 + 100, i * 100);
+        spawnPurpleViruses();
     }
     
     game.add.button(950, 500, 'noButton', getLotOfMoney);
@@ -62,9 +62,9 @@ function createWalls() {
     var wall_width = 7;
 
     var w1 = walls.create(-wall_width, 0, 'vertical_wall');
-    var w2 = walls.create(game.width - 400, 0, 'vertical_wall');
+    var w2 = walls.create(game.width, 0, 'vertical_wall');
     var w3 = walls.create(0, -wall_width, 'horizontal_wall');
-    var w4 = walls.create(0, game.height, 'horizontal_wall');
+    var w4 = walls.create(0, game.height - 100, 'horizontal_wall');
 
     w1.body.immovable = true;
     w2.body.immovable = true;
@@ -79,7 +79,6 @@ function update() {
     });
     
     this.game.physics.arcade.collide(viruses, walls, collidesWall, null, this);
-    this.game.physics.arcade.collide(viruses, viruses, null, null, this);
     count_text.text = click_count;
 }
 
@@ -97,24 +96,27 @@ function onDown(sprite, pointer) {
 
 function spawnPurpleViruses(){
 
-    var X = 600 * Math.random() + 100;
-    var Y = 400 * Math.random() + 100;
-        
-    var virus = viruses.create(X, Y, 'purple_virus');
-    
-    var angleOnCircle = 2 * Math.PI * Math.random();
-    
-    virus.anchor.setTo(0.5, 0.5);
-    virus.inputEnabled = true;
-    virus.rotation_speed = 2 * Math.random() - 1;
-    virus.body.velocity.x = Math.cos(angleOnCircle) * 150;
-    virus.body.velocity.y = Math.sin(angleOnCircle) * 150;
-    virus.body.bounce.set(1);
+      var virus = new Viruses(game, "purple_virus", 150);
+      virus.events.onInputDown.add(onDown, this);
+      viruses.add(virus);
+//    var X = 600 * Math.random() + 100;
+//    var Y = 400 * Math.random() + 100;
+//        
+//    var virus = viruses.create(X, Y, 'purple_virus');
+//    
+//    var angleOnCircle = 2 * Math.PI * Math.random();
+//    
+//    virus.anchor.setTo(0.5, 0.5);
+//    virus.inputEnabled = true;
+//    virus.rotation_speed = 2 * Math.random() - 1;
+//    virus.body.velocity.x = Math.cos(angleOnCircle) * 150;
+//    virus.body.velocity.y = Math.sin(angleOnCircle) * 150;
+//    virus.body.bounce.set(1);
 }
 
 function spawnGreenViruses(){
 
-    var virus = new Viruses(game, "green_virus");
+    var virus = new Viruses(game, "green_virus", 300);
     virus.events.onInputDown.add(onDown, this);
 
     viruses.add(virus);    
