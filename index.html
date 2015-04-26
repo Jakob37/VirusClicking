@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <script src="phaser.min.js"></script>
-        <script src="Virus Prototype.js"></script>
+        <script src="VirusPrototype.js"></script>
         
     </head>
 <body>
@@ -14,7 +14,7 @@
 <script>
 
 var game = new Phaser.Game(1200, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
-    
+
 function preload() {
     game.load.image('noButton', 'sprites/NoButton.png');
     game.load.image('purpleButton', 'sprites/AddPurple.png');
@@ -76,14 +76,11 @@ function update() {
     
     viruses.forEach(function(virus){
        virus.angle += virus.rotation_speed;
-       virus.events.onInputDown.add(onDown, this);
     });
     
     this.game.physics.arcade.collide(viruses, walls, collidesWall, null, this);
     this.game.physics.arcade.collide(viruses, viruses, null, null, this);
     count_text.text = click_count;
-    
-    
 }
 
 function collidesWall(virus, wall) {
@@ -91,11 +88,13 @@ function collidesWall(virus, wall) {
 }
 
 function onDown(sprite, pointer) {
+    
+    console.log('i onDown-funktion');
     sprite.rotation_speed *= 1.5;
     sprite.body.velocity.x *= 1.2;
-    sprite.body.velocity.y *= 1.2;
-    
+    sprite.body.velocity.y *= 1.2;    
 }
+
 function spawnPurpleViruses(){
 
     var X = 600 * Math.random() + 100;
@@ -115,21 +114,10 @@ function spawnPurpleViruses(){
 
 function spawnGreenViruses(){
 
-    var virus = new Viruses (game, "green_virus");
-    viruses.add(virus);
-    //var X = 600 * Math.random() + 100;
-    //var Y = 400 * Math.random() + 100;
-        
-    //var virus = viruses.create(X, Y, 'green_virus');
-    
-    //var angleOnCircle = 2 * Math.PI * Math.random();
-    
-    //virus.anchor.setTo(0.5, 0.5);
-    //virus.inputEnabled = true;
-    //virus.rotation_speed = 4 * Math.random() - 1;
-    //virus.body.velocity.x = Math.cos(angleOnCircle) * 300;
-    //virus.body.velocity.y = Math.sin(angleOnCircle) * 300;
-    //virus.body.bounce.set(1);
+    var virus = new Viruses(game, "green_virus");
+    virus.events.onInputDown.add(onDown, this);
+
+    viruses.add(virus);    
 }
 
 function buyPurpleVirus(){
@@ -149,8 +137,8 @@ function buyGreenVirus(){
 function getLotOfMoney(){
     click_count += 1000;
 }
-</script>
 
+</script>
 
 </body>
 </html>
