@@ -39,15 +39,15 @@ function create() {
         spawnPurpleViruses();
     }
     
-    game.add.button(950, 500, 'noButton', getLotOfMoney);
-    game.add.button(950, 200, 'purpleButton', buyPurpleVirus);
-    game.add.button(950, 300, 'greenButton', buyGreenVirus);
+    game.add.button(10, 425, 'noButton', getLotOfMoney);
+    game.add.button(70, 425, 'purpleButton', buyPurpleVirus);
+    game.add.button(130, 425, 'greenButton', buyGreenVirus);
     
     click_count = 0;
 
     info_text = game.add.text(600,550, 'CLICK US :)', 
         {fontSize: '32px', fill: '#ffa'});
-    count_text = game.add.text(600,450, 'CLICK US :)', 
+    count_text = game.add.text(10,395, 'CLICK US :)', 
         {fontSize: '32px', fill: '#ffa'});
 
     createWalls();
