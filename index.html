@@ -16,6 +16,7 @@
 var game = new Phaser.Game(320, 480, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
+    game.load.image('moneyButton', 'sprites/MoneyButton.png');
     game.load.image('noButton', 'sprites/NoButton.png');
     game.load.image('purpleButton', 'sprites/AddPurple.png');
     game.load.image('greenButton', 'sprites/AddGreen.png');
@@ -39,9 +40,10 @@ function create() {
         spawnPurpleViruses();
     }
     
-    game.add.button(10, 425, 'noButton', getLotOfMoney);
-    game.add.button(70, 425, 'purpleButton', buyPurpleVirus);
-    game.add.button(130, 425, 'greenButton', buyGreenVirus);
+    game.add.button(10, 425, 'moneyButton', getLotOfMoney);
+    game.add.button(70, 425, 'noButton', getLotOfMoney);
+    game.add.button(130, 425, 'purpleButton', buyPurpleVirus);
+    game.add.button(190, 425, 'greenButton', buyGreenVirus);
     
     click_count = 0;
 
