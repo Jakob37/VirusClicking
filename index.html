@@ -39,7 +39,8 @@ function create() {
         spawnPurpleViruses();
     }
     
-    game.add.button(10, 425, 'noButton', getLotOfMoney);
+    game.add.button(10, 425, 'noButton', gofull);
+//    game.add.button(10, 425, 'noButton', getLotOfMoney);
     game.add.button(70, 425, 'purpleButton', buyPurpleVirus);
     game.add.button(130, 425, 'greenButton', buyGreenVirus);
     
@@ -51,6 +52,19 @@ function create() {
         {fontSize: '32px', fill: '#ffa'});
 
     createWalls();
+    
+    game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.refresh();
+}
+
+function gofull() {
+    if (game.scale.isFullScreen) {
+        game.scale.stopFullScreen();
+    }
+    else {
+        game.scale.startFullScreen(false);
+    }
 }
 
 function createWalls() {
